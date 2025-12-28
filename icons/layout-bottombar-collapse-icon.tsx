@@ -1,0 +1,89 @@
+"use client";
+
+import { AnimatedIconProps } from "./types";
+import { motion, useAnimate } from "motion/react";
+
+const LayoutBottombarCollapseIcon = ({
+  size = 24,
+  color = "currentColor",
+  strokeWidth = 2,
+  className = "",
+}: AnimatedIconProps) => {
+  const [scope, animate] = useAnimate();
+
+  const startAnimate = async () => {
+    // Animate the chevron bouncing up
+    animate(
+      ".chevron",
+      {
+        y: 2,
+      },
+      {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    );
+
+    // Fade the bottom bar slightly
+    animate(
+      ".bottombar",
+      {
+        opacity: 0.6,
+      },
+      {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    );
+  };
+
+  const endAnimate = async () => {
+    animate(
+      ".chevron",
+      {
+        y: 0,
+      },
+      {
+        duration: 0.25,
+        ease: "easeInOut",
+      },
+    );
+
+    animate(
+      ".bottombar",
+      {
+        opacity: 1,
+      },
+      {
+        duration: 0.25,
+        ease: "easeInOut",
+      },
+    );
+  };
+
+  return (
+    <motion.svg
+      ref={scope}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill={color}
+      className={`cursor-pointer ${className}`}
+      onHoverStart={startAnimate}
+      onHoverEnd={endAnimate}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+
+      {/* Main container */}
+      <path d="M18 3a3 3 0 0 1 2.995 2.824l.005 .176v12a3 3 0 0 1 -2.824 2.995l-.176 .005h-12a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-12a3 3 0 0 1 2.824 -2.995l.176 -.005h12zm0 2h-12a1 1 0 0 0 -.993 .883l-.007 .117v9h14v-9a1 1 0 0 0 -.883 -.993l-.117 -.007z" />
+
+      {/* Chevron arrow */}
+      <motion.g className="chevron">
+        <path d="M10.613 8.21l.094 .083l1.293 1.292l1.293 -1.292a1 1 0 0 1 1.32 -.083l.094 .083a1 1 0 0 1 .083 1.32l-.083 .094l-2 2a1 1 0 0 1 -1.32 .083l-.094 -.083l-2 -2a1 1 0 0 1 1.32 -1.497z" />
+      </motion.g>
+    </motion.svg>
+  );
+};
+
+export default LayoutBottombarCollapseIcon;

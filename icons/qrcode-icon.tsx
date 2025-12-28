@@ -1,7 +1,7 @@
 import { AnimatedIconProps } from "./types";
 import { motion, useAnimate } from "motion/react";
 
-const QRCodeSVG = ({
+const QrCodeIcon = ({
   size = 24,
   color = "currentColor",
   strokeWidth = 2,
@@ -224,4 +224,4 @@ const QRCodeSVG = ({
   );
 };
 
-export default QRCodeSVG;
+export default QrCodeIcon;

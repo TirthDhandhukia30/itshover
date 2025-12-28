@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "world-icon",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "icons/world-icon.tsx",
+      "content": "\"use client\";\n\nimport { AnimatedIconProps } from \"./types\";\nimport { motion, useAnimate } from \"motion/react\";\n\nconst WorldIcon = ({\n  size = 24,\n  color = \"currentColor\",\n  strokeWidth = 2,\n  className = \"\",\n}: AnimatedIconProps) => {\n  const [scope, animate] = useAnimate();\n\n  const startAnimate = async () => {\n    // Rotate the globe\n    animate(\n      \".world-meridians\",\n      {\n        pathLength: [0, 1],\n      },\n      {\n        duration: 1,\n        ease: \"linear\",\n      },\n    );\n  };\n\n  const endAnimate = async () => {\n    animate(\n      \".world-meridians\",\n      {\n        pathLength: 1,\n      },\n      {\n        duration: 0.2,\n        ease: \"easeInOut\",\n      },\n    );\n  };\n\n  return (\n    <motion.svg\n      ref={scope}\n      xmlns=\"http://www.w3.org/2000/svg\"\n      width={size}\n      height={size}\n      viewBox=\"0 0 24 24\"\n      fill=\"none\"\n      stroke={color}\n      strokeWidth={strokeWidth}\n      strokeLinecap=\"round\"\n      strokeLinejoin=\"round\"\n      className={`cursor-pointer ${className}`}\n      onHoverStart={startAnimate}\n      onHoverEnd={endAnimate}\n    >\n      <path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\" />\n\n      {/* Globe circle */}\n      <motion.path\n        d=\"M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0\"\n        className=\"world-globe\"\n        style={{ transformOrigin: \"50% 50%\" }}\n      />\n\n      {/* Horizontal lines and meridians */}\n      <motion.g\n        className=\"world-meridians\"\n        style={{ transformOrigin: \"50% 50%\" }}\n      >\n        <motion.path d=\"M3.6 9h16.8\" className=\"world-meridians\" />\n        <motion.path d=\"M3.6 15h16.8\" className=\"world-meridians\" />\n        <motion.path d=\"M11.5 3a17 17 0 0 0 0 18\" className=\"world-meridians\" />\n        <motion.path d=\"M12.5 3a17 17 0 0 1 0 18\" className=\"world-meridians\" />\n      </motion.g>\n    </motion.svg>\n  );\n};\n\nexport default WorldIcon;\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "icons/types.ts",
+      "content": "export interface AnimatedIconProps {\n  /** Icon size in pixels or CSS string */\n  size?: number | string;\n  /** Icon color (defaults to currentColor) */\n  color?: string;\n  /** SVG stroke width */\n  strokeWidth?: number;\n  /** Additional CSS classes */\n  className?: string;\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

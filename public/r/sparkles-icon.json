@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sparkles-icon",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "icons/sparkles-icon.tsx",
+      "content": "\"use client\";\n\nimport { AnimatedIconProps } from \"./types\";\nimport { motion, useAnimate } from \"motion/react\";\n\nconst SparklesIcon = ({\n  size = 24,\n  color = \"currentColor\",\n  strokeWidth = 2,\n  className = \"\",\n}: AnimatedIconProps) => {\n  const [scope, animate] = useAnimate();\n\n  const startAnimate = async () => {\n    // Main sparkle rotates and scales\n    animate(\n      \".sparkle-main\",\n      {\n        rotate: 180,\n        scale: [1, 1.2, 1],\n      },\n      {\n        duration: 0.6,\n        ease: \"easeInOut\",\n      },\n    );\n\n    // Top sparkle twinkles\n    animate(\n      \".sparkle-top\",\n      {\n        rotate: -90,\n        scale: [1, 0.8, 1.1],\n        opacity: [1, 0.6, 1],\n      },\n      {\n        duration: 0.5,\n        ease: \"easeInOut\",\n        delay: 0.1,\n      },\n    );\n\n    // Bottom sparkle twinkles\n    animate(\n      \".sparkle-bottom\",\n      {\n        rotate: 90,\n        scale: [1, 1.15, 0.9],\n        opacity: [1, 0.7, 1],\n      },\n      {\n        duration: 0.5,\n        ease: \"easeInOut\",\n        delay: 0.05,\n      },\n    );\n  };\n\n  const endAnimate = async () => {\n    animate(\n      \".sparkle-main\",\n      {\n        rotate: 0,\n        scale: 1,\n      },\n      {\n        duration: 0.3,\n        ease: \"easeInOut\",\n      },\n    );\n\n    animate(\n      \".sparkle-top\",\n      {\n        rotate: 0,\n        scale: 1,\n        opacity: 1,\n      },\n      {\n        duration: 0.3,\n        ease: \"easeInOut\",\n      },\n    );\n\n    animate(\n      \".sparkle-bottom\",\n      {\n        rotate: 0,\n        scale: 1,\n        opacity: 1,\n      },\n      {\n        duration: 0.3,\n        ease: \"easeInOut\",\n      },\n    );\n  };\n\n  return (\n    <motion.svg\n      ref={scope}\n      xmlns=\"http://www.w3.org/2000/svg\"\n      width={size}\n      height={size}\n      viewBox=\"0 0 24 24\"\n      fill=\"none\"\n      stroke={color}\n      strokeWidth={strokeWidth}\n      strokeLinecap=\"round\"\n      strokeLinejoin=\"round\"\n      className={`cursor-pointer ${className}`}\n      onHoverStart={startAnimate}\n      onHoverEnd={endAnimate}\n    >\n      <path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\" />\n\n      {/* Bottom right sparkle */}\n      <motion.path\n        d=\"M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2z\"\n        className=\"sparkle-bottom\"\n        style={{ transformOrigin: \"18px 18px\" }}\n      />\n\n      {/* Top right sparkle */}\n      <motion.path\n        d=\"M16 6a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2z\"\n        className=\"sparkle-top\"\n        style={{ transformOrigin: \"18px 6px\" }}\n      />\n\n      {/* Main large sparkle */}\n      <motion.path\n        d=\"M9 18a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6z\"\n        className=\"sparkle-main\"\n        style={{ transformOrigin: \"9px 12px\" }}\n      />\n    </motion.svg>\n  );\n};\n\nexport default SparklesIcon;\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "icons/types.ts",
+      "content": "export interface AnimatedIconProps {\n  /** Icon size in pixels or CSS string */\n  size?: number | string;\n  /** Icon color (defaults to currentColor) */\n  color?: string;\n  /** SVG stroke width */\n  strokeWidth?: number;\n  /** Additional CSS classes */\n  className?: string;\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

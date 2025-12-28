@@ -1,5 +1,5 @@
 import { AnimatedIconProps } from "./types";
-import { motion, useAnimate } from "framer-motion";
+import { motion, useAnimate } from "motion/react";
 
 const SkullEmoji = ({
   size = 24,

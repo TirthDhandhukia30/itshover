@@ -12,18 +12,22 @@ const CopyOffIcon = ({
   const hoverAnimation = async () => {
     animate(
       ".slash-line",
-      { rotate: [0, -5, 5, 0] },
-      { duration: 0.4, ease: "easeInOut" },
+      { pathLength: [0, 1] },
+      { duration: 0.5, ease: "easeInOut" },
     );
     animate(
       ".copy-elements",
       { opacity: [1, 0.5, 1] },
-      { duration: 0.4, ease: "easeInOut" },
+      { duration: 0.5, ease: "easeInOut" },
     );
   };
 
   const hoverEndAnimation = () => {
-    animate(".slash-line", { rotate: 0 }, { duration: 0.2, ease: "easeOut" });
+    animate(
+      ".slash-line",
+      { pathLength: 1 },
+      { duration: 0.2, ease: "easeOut" },
+    );
     animate(
       ".copy-elements",
       { opacity: 1 },

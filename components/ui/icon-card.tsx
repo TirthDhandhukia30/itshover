@@ -33,7 +33,7 @@ const IconCard = ({
     <div className="bg-background flex min-w-[140px] flex-1 flex-col items-center justify-center gap-4 rounded-lg border p-4 shadow-sm transition-all hover:shadow-md sm:w-48 sm:flex-none">
       <Link
         href={`/icons/${name}`}
-        className="flex cursor-pointer items-center justify-center p-2 transition-transform hover:scale-110"
+        className="flex cursor-pointer items-center justify-center p-2"
       >
         <Tooltip>
           <TooltipTrigger>

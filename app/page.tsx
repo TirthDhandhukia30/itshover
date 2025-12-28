@@ -5,7 +5,7 @@ import CTASection from "@/components/cta-section";
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <Container>
         <Hero />
         <Features />

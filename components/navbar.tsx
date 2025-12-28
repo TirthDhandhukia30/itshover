@@ -34,7 +34,7 @@ const Navbar = () => {
             </div>
             <div className="flex flex-col">
               <h1 className="text-foreground font-sans">
-                <span className="text-primary">Intent</span> UI
+                <span className="text-primary">its</span>hover
               </h1>
             </div>
           </Link>
@@ -45,13 +45,13 @@ const Navbar = () => {
             className="hover:text-foreground/80 text-muted-foreground transition-colors"
             href="/icons"
           >
-            Icons
+            icons
           </Link>
           <Link
             className="hover:text-foreground/80 text-muted-foreground transition-colors"
             href="/sponsor"
           >
-            Sponsor
+            sponsor
           </Link>
         </nav>
 

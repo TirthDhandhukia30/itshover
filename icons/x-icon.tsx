@@ -1,0 +1,102 @@
+"use client";
+
+import { AnimatedIconProps } from "./types";
+import { motion, useAnimate } from "motion/react";
+
+const XIcon = ({
+  size = 24,
+  color = "currentColor",
+  strokeWidth = 2,
+  className = "",
+}: AnimatedIconProps) => {
+  const [scope, animate] = useAnimate();
+
+  const startAnimate = async () => {
+    // Rotate the X icon slightly and add a scale effect
+    animate(
+      ".x-line-1",
+      {
+        rotate: 15,
+        scale: 1.1,
+      },
+      {
+        duration: 0.2,
+        ease: "easeOut",
+      },
+    );
+
+    animate(
+      ".x-line-2",
+      {
+        rotate: -15,
+        scale: 1.1,
+      },
+      {
+        duration: 0.2,
+        ease: "easeOut",
+      },
+    );
+  };
+
+  const endAnimate = async () => {
+    animate(
+      ".x-line-1",
+      {
+        rotate: 0,
+        scale: 1,
+      },
+      {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
+    );
+
+    animate(
+      ".x-line-2",
+      {
+        rotate: 0,
+        scale: 1,
+      },
+      {
+        duration: 0.2,
+        ease: "easeInOut",
+      },
+    );
+  };
+
+  return (
+    <motion.svg
+      ref={scope}
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke={color}
+      strokeWidth={strokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={`cursor-pointer ${className}`}
+      onHoverStart={startAnimate}
+      onHoverEnd={endAnimate}
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+
+      {/* First line (top-left to bottom-right) */}
+      <motion.path
+        d="M18 6l-12 12"
+        className="x-line-1"
+        style={{ transformOrigin: "50% 50%" }}
+      />
+
+      {/* Second line (bottom-left to top-right) */}
+      <motion.path
+        d="M6 6l12 12"
+        className="x-line-2"
+        style={{ transformOrigin: "50% 50%" }}
+      />
+    </motion.svg>
+  );
+};
+
+export default XIcon;

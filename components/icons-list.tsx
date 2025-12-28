@@ -9,6 +9,7 @@ import Link from "next/link";
 
 const IconList = () => {
   const searchInputRef = useRef<SearchInputRef>(null);
+  const iconCount = useMemo(() => ICON_LIST.length, []);
 
   const fuse = useMemo(
     () =>
@@ -21,7 +22,7 @@ const IconList = () => {
         ignoreLocation: true,
         findAllMatches: true,
         isCaseSensitive: false,
-        minMatchCharLength: 2,
+        minMatchCharLength: 1,
       }),
     [],
   );
@@ -99,7 +100,7 @@ const IconList = () => {
           ref={searchInputRef}
           value={searchQuery}
           onChange={setSearchQuery}
-          placeholder="Search Icons... (⌘ + F)"
+          placeholder={`Search Icons (${iconCount})... (⌘ + F)`}
           className="w-full md:w-1/2"
         />
       </motion.div>

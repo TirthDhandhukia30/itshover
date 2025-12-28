@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { ICON_NAMES } from "@/lib/icon-names";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://intent-ui.com";
+  const baseUrl = "https://itshover.com";
 
   // Static pages
   const staticPages: MetadataRoute.Sitemap = [

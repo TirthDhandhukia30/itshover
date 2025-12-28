@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dots-horizontal-icon",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "icons/dots-horizontal-icon.tsx",
+      "content": "\"use client\";\n\nimport { AnimatedIconProps } from \"./types\";\nimport { motion, useAnimate } from \"motion/react\";\n\nconst DotsHorizontalIcon = ({\n  size = 24,\n  color = \"currentColor\",\n  strokeWidth = 2,\n  className = \"\",\n}: AnimatedIconProps) => {\n  const [scope, animate] = useAnimate();\n\n  const startAnimate = async () => {\n    animate(\n      \".dot-left\",\n      {\n        x: [-2, 0],\n        scale: [1, 1.2, 1],\n      },\n      {\n        duration: 0.3,\n        ease: \"easeOut\",\n      },\n    );\n\n    animate(\n      \".dot-center\",\n      {\n        scale: [1, 1.3, 1],\n      },\n      {\n        duration: 0.3,\n        delay: 0.1,\n        ease: \"easeOut\",\n      },\n    );\n\n    animate(\n      \".dot-right\",\n      {\n        x: [2, 0],\n        scale: [1, 1.2, 1],\n      },\n      {\n        duration: 0.3,\n        delay: 0.2,\n        ease: \"easeOut\",\n      },\n    );\n  };\n\n  return (\n    <motion.svg\n      ref={scope}\n      xmlns=\"http://www.w3.org/2000/svg\"\n      width={size}\n      height={size}\n      viewBox=\"0 0 24 24\"\n      fill=\"none\"\n      stroke={color}\n      strokeWidth={strokeWidth}\n      strokeLinecap=\"round\"\n      strokeLinejoin=\"round\"\n      className={`cursor-pointer ${className}`}\n      onHoverStart={startAnimate}\n    >\n      <path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\" />\n\n      <motion.path\n        d=\"M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"\n        className=\"dot-left\"\n        style={{ transformOrigin: \"50% 50%\" }}\n      />\n\n      <motion.path\n        d=\"M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"\n        className=\"dot-center\"\n        style={{ transformOrigin: \"50% 50%\" }}\n      />\n\n      <motion.path\n        d=\"M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0\"\n        className=\"dot-right\"\n        style={{ transformOrigin: \"50% 50%\" }}\n      />\n    </motion.svg>\n  );\n};\n\nexport default DotsHorizontalIcon;\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "icons/types.ts",
+      "content": "export interface AnimatedIconProps {\n  /** Icon size in pixels or CSS string */\n  size?: number | string;\n  /** Icon color (defaults to currentColor) */\n  color?: string;\n  /** SVG stroke width */\n  strokeWidth?: number;\n  /** Additional CSS classes */\n  className?: string;\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -8,11 +8,23 @@ const PlayerIcon = ({ size = 24, className = "" }: AnimatedIconProps) => {
     await animate(
       ".play-icon",
       {
-        scale: [1, 1.2, 0.95, 1],
-        x: [0, 4, 0],
+        scale: [1, 0.8],
       },
       {
-        duration: 0.3,
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    );
+  };
+
+  const endAnimation = async () => {
+    await animate(
+      ".play-icon",
+      {
+        scale: [0.8, 1],
+      },
+      {
+        duration: 0.4,
         ease: "easeOut",
       },
     );
@@ -23,6 +35,7 @@ const PlayerIcon = ({ size = 24, className = "" }: AnimatedIconProps) => {
       ref={scope}
       onTap={playAnimation}
       onHoverStart={playAnimation}
+      onHoverEnd={endAnimation}
       className={`inline-flex cursor-pointer ${className}`}
     >
       <svg

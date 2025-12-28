@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "lock-icon",
+  "dependencies": [
+    "motion"
+  ],
+  "devDependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "icons/lock-icon.tsx",
+      "content": "\"use client\";\n\nimport { AnimatedIconProps } from \"./types\";\nimport { motion, useAnimate } from \"motion/react\";\n\nconst LockIcon = ({\n  size = 48,\n  color = \"currentColor\",\n  strokeWidth = 2,\n  className = \"\",\n}: AnimatedIconProps) => {\n  const [scope, animate] = useAnimate();\n\n  const startAnimate = async () => {\n    await animate(\n      \".lock-upper-body\",\n      {\n        rotate: 40,\n        y: -1.7,\n        x: 3,\n      },\n      {\n        duration: 0.28,\n        ease: \"easeOut\",\n      },\n    );\n  };\n\n  const endAnimation = async () => {\n    await animate(\n      \".lock-upper-body\",\n      {\n        rotate: 0,\n        x: 0,\n        y: 0,\n      },\n      {\n        duration: 0.22,\n        ease: \"easeInOut\",\n      },\n    );\n  };\n\n  return (\n    <motion.svg\n      ref={scope}\n      xmlns=\"http://www.w3.org/2000/svg\"\n      width={size}\n      height={size}\n      viewBox=\"0 0 24 24\"\n      fill=\"none\"\n      stroke={color}\n      strokeWidth={strokeWidth}\n      strokeLinecap=\"round\"\n      strokeLinejoin=\"round\"\n      className={`cursor-pointer ${className}`}\n      onHoverStart={startAnimate}\n      onHoverEnd={endAnimation}\n    >\n      <path stroke=\"none\" d=\"M0 0h24v24H0z\" fill=\"none\" />\n\n      <path d=\"M5 13a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-6z\" />\n\n      <path d=\"M11 16a1 1 0 1 0 2 0a1 1 0 0 0 -2 0\" />\n\n      <motion.path\n        d=\"M8 11v-4a4 4 0 1 1 8 0v4\"\n        className=\"lock-upper-body\"\n        style={{\n          transformOrigin: \"50% 100%\",\n        }}\n      />\n    </motion.svg>\n  );\n};\n\nexport default LockIcon;\n",
+      "type": "registry:ui"
+    },
+    {
+      "path": "icons/types.ts",
+      "content": "export interface AnimatedIconProps {\n  /** Icon size in pixels or CSS string */\n  size?: number | string;\n  /** Icon color (defaults to currentColor) */\n  color?: string;\n  /** SVG stroke width */\n  strokeWidth?: number;\n  /** Additional CSS classes */\n  className?: string;\n}\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
