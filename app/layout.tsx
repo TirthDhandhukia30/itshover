@@ -67,7 +67,10 @@ export default function RootLayout({
             <CommandMenuProvider>
               <TooltipProvider>
                 <CommandMenu />
-                <StickyBanner className="bg-primary text-primary-foreground h-auto min-h-8 py-2" hideOnScroll>
+                <StickyBanner
+                  className="bg-primary text-primary-foreground h-auto min-h-8 py-2"
+                  hideOnScroll
+                >
                   <Link
                     href="https://evilcharts.com/?ref=itshover.com"
                     target="_blank"
