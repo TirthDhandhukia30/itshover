@@ -12,14 +12,10 @@ import { LINKS } from "@/constants";
 import LayersIcon from "@/icons/layers-icon";
 import AlignCenterIcon from "@/icons/align-center-icon";
 import XIcon from "@/icons/x-icon";
+import { isMac } from "@/lib/utils";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMac] = useState(() =>
-    typeof navigator !== "undefined"
-      ? navigator.userAgent.toLowerCase().includes("mac")
-      : true,
-  );
   const { toggle: toggleCommandMenu } = useCommandMenu();
 
   const toggleMobileMenu = () => {
@@ -94,7 +90,7 @@ const Navbar = () => {
               className="hover:text-foreground/80 text-foreground/60 w-32 cursor-pointer bg-transparent pr-4 pl-2 text-xs font-medium transition-colors outline-none sm:text-sm xl:w-40"
             />
             <Kbd>
-              <span className="text-xs">{isMac ? "⌘" : "Ctrl+"}</span>K
+              <span className="text-xs">{isMac() ? "⌘" : "Ctrl+"}</span>K
             </Kbd>
           </button>
         </div>
