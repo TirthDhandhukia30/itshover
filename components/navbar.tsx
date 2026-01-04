@@ -53,6 +53,12 @@ const Navbar = () => {
           >
             sponsor
           </Link>
+          <Link
+            className="hover:text-foreground/80 text-muted-foreground transition-colors"
+            href="/example"
+          >
+            example
+          </Link>
         </nav>
 
         <div className="hidden flex-1 items-center justify-end gap-2 sm:gap-2 md:flex md:justify-end">
@@ -126,6 +132,13 @@ const Navbar = () => {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Sponsor
+            </Link>
+            <Link
+              className="hover:text-foreground/80 text-muted-foreground text-sm font-medium transition-colors"
+              href="/example"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Example
             </Link>
 
             <button

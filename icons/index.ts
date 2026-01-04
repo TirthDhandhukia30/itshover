@@ -163,6 +163,7 @@ import KeyframesIcon from "./keyframes-icon";
 import LayersIcon from "./layers-icon";
 import LayoutBottombarCollapseIcon from "./layout-bottombar-collapse-icon";
 import LayoutSidebarRightIcon from "./layout-sidebar-right-icon";
+import LayoutSidebarRightCollapseIcon from "./layout-sidebar-right-collapse-icon";
 import PaintIcon from "./paint-icon";
 import PlugConnectedIcon from "./plug-connected-icon";
 import PlugConnectedXIcon from "./plug-connected-x-icon";
@@ -1337,6 +1338,19 @@ const ICON_LIST: IconType[] = [
     name: "target-icon",
     icon: TargetIcon,
     keywords: ["target", "aim", "goal", "focus", "bullseye", "center"],
+  },
+  {
+    name: "layout-sidebar-right-collapse-icon",
+    icon: LayoutSidebarRightCollapseIcon,
+    keywords: [
+      "layout",
+      "sidebar",
+      "right",
+      "collapse",
+      "panel",
+      "ui",
+      "interface",
+    ],
   },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
