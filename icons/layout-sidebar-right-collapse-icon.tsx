@@ -15,19 +15,19 @@ const LayoutSidebarRightCollapseIcon = forwardRef<
     const start = async () => {
       animate(
         ".chevron",
-        { x: [0, 3, 0], opacity: [1, 0.7, 1] },
-        { duration: 1.5, repeat: Infinity },
+        { x: [0, 2, 0], opacity: [1, 0.7, 1] },
+        { duration: 1.5 },
       );
       animate(
         ".sidebar",
-        { opacity: [1, 0.6, 1] },
-        { duration: 2, repeat: Infinity },
+        { x: [0, 2, 0] },
+        { duration: 2 },
       );
     };
 
     const stop = () => {
       animate(".chevron", { x: 0, opacity: 1 }, { duration: 0.2 });
-      animate(".sidebar", { opacity: 1 }, { duration: 0.2 });
+      animate(".sidebar", { x: 0 }, { duration: 0.2 });
     };
 
     useImperativeHandle(ref, () => {
@@ -59,7 +59,7 @@ const LayoutSidebarRightCollapseIcon = forwardRef<
         strokeWidth={strokeWidth}
         strokeLinecap="round"
         strokeLinejoin="round"
-        className={`icon icon-tabler icons-tabler-outline icon-tabler-layout-sidebar-right-collapse ${className}`}
+        className={`cursor-pointer ${className}`}
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
