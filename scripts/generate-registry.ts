@@ -78,6 +78,73 @@ function generateRegistryItem(filename: string): RegistryItem {
 }
 
 /**
+ * Extract icon names from icons/index.ts ICON_LIST
+ */
+function getIconListNames(): string[] {
+  const indexPath = path.join(ICONS_DIR, "index.ts");
+  const content = fs.readFileSync(indexPath, "utf-8");
+
+  // Match all name: "xxx" patterns in ICON_LIST
+  const namePattern = /name:\s*["']([^"']+)["']/g;
+  const names: string[] = [];
+  let match;
+
+  while ((match = namePattern.exec(content)) !== null) {
+    const name = match[1];
+    // Only include names with hyphens (icon names like "github-icon")
+    // This excludes customProps names like "shakeOnClick", "dangerHover"
+    if (name.includes("-")) {
+      names.push(name);
+    }
+  }
+
+  return [...new Set(names)];
+}
+
+/**
+ * Validate that all icon files are registered in ICON_LIST
+ */
+function validateIconList(iconFiles: string[]): void {
+  const iconListNames = new Set(getIconListNames());
+  const fileNames = new Set(iconFiles.map(fileToRegistryName));
+
+  // Find icons in files but not in ICON_LIST
+  const missingFromList: string[] = [];
+  for (const fileName of fileNames) {
+    if (!iconListNames.has(fileName)) {
+      missingFromList.push(fileName);
+    }
+  }
+
+  // Find icons in ICON_LIST but not in files
+  const missingFromFiles: string[] = [];
+  for (const listName of iconListNames) {
+    if (!fileNames.has(listName)) {
+      missingFromFiles.push(listName);
+    }
+  }
+
+  // Report warnings
+  if (missingFromList.length > 0) {
+    console.log("");
+    console.log(
+      `⚠️  Warning: ${missingFromList.length} icon(s) not in ICON_LIST (won't show on website):`,
+    );
+    missingFromList.forEach((name) => console.log(`   - ${name}`));
+    console.log("   → Add them to icons/index.ts to display on the website");
+  }
+
+  if (missingFromFiles.length > 0) {
+    console.log("");
+    console.log(
+      `⚠️  Warning: ${missingFromFiles.length} ICON_LIST entry(s) without matching file:`,
+    );
+    missingFromFiles.forEach((name) => console.log(`   - ${name}`));
+    console.log("   → Remove them from icons/index.ts or create the file");
+  }
+}
+
+/**
  * Main function to generate registry.json
  */
 function generateRegistry(): void {
@@ -113,6 +180,10 @@ function generateRegistry(): void {
   console.log("");
   console.log("✔ Registry generated successfully!");
   console.log(`  - Total icons: ${items.length}`);
+
+  // Validate ICON_LIST sync
+  validateIconList(iconFiles);
+
   console.log("");
 }
 
