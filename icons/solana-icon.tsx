@@ -71,7 +71,6 @@ const SolanaIcon = forwardRef<AnimatedIconHandle, AnimatedIconProps>(
         strokeLinejoin="round"
         className={`sol-symbol ${className}`}
       >
-        {/* Solana logo - three horizontal lines with arrows */}
         <motion.path
           className="sol-line sol-line-1"
           d="M4 6h14l2 2H6L4 6z"
