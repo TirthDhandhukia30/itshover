@@ -23,33 +23,40 @@ import RefreshIcon from "@/icons/refresh-icon";
 import GearIcon from "@/icons/gear-icon";
 import MessageCircleIcon from "@/icons/message-circle-icon";
 import SendIcon from "@/icons/send-icon";
-import CheckedIcon from "@/icons/checked-icon";
+import CurrencyBitcoinIcon from "@/icons/currency-bitcoin-icon";
+import CurrencyEthereumIcon from "@/icons/currency-ethereum-icon";
+import SolanaIcon from "@/icons/solana-icon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-const CryptoAddress = ({
-  label,
-  address,
-}: {
-  label: string;
-  address: string;
-}) => {
+const CryptoButton = ({ address, icon, label }: { address: string; icon: React.ReactNode; label: string }) => {
   const [copied, setCopied] = useState(false);
-
   const handleCopy = async () => {
     await navigator.clipboard.writeText(address);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
-
   return (
-    <button
-      onClick={handleCopy}
-      className="hover:text-foreground group flex cursor-pointer items-center gap-1.5 text-left text-xs transition-colors"
-    >
-      <span className="truncate">
-        {label}: {address.slice(0, 20)}...
-      </span>
-      {copied && <CheckedIcon className="h-3 w-3 shrink-0 text-green-500" />}
-    </button>
+    <TooltipProvider>
+      <Tooltip open={copied ? true : undefined}>
+        <TooltipTrigger asChild>
+          <button
+            onClick={handleCopy}
+            className="hover:bg-accent flex cursor-pointer items-center justify-center rounded-lg border p-2 transition-colors"
+            aria-label={`Copy ${label} address`}
+          >
+            {icon}
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          <p>{copied ? "Copied!" : `Copy ${label} address`}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 
@@ -133,9 +140,23 @@ const Footer = () => {
               </Link>
               <div className="text-muted-foreground space-y-2 text-sm">
                 <p className="text-foreground font-medium">Crypto</p>
-                <CryptoAddress label="BTC" address={SPONSOR.btc} />
-                <CryptoAddress label="ETH" address={SPONSOR.eth} />
-                <CryptoAddress label="SOL" address={SPONSOR.sol} />
+                <div className="flex items-center gap-2">
+                  <CryptoButton
+                    address={SPONSOR.btc}
+                    icon={<CurrencyBitcoinIcon className="h-5 w-5 text-orange-500" />}
+                    label="BTC"
+                  />
+                  <CryptoButton
+                    address={SPONSOR.eth}
+                    icon={<CurrencyEthereumIcon className="h-5 w-5 text-purple-500" />}
+                    label="ETH"
+                  />
+                  <CryptoButton
+                    address={SPONSOR.sol}
+                    icon={<SolanaIcon className="h-5 w-5 text-green-500" />}
+                    label="SOL"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -144,22 +165,25 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Featured Icons</h3>
             <div className="grid grid-cols-5 gap-3 sm:grid-cols-6 md:grid-cols-5 lg:grid-cols-10">
               {featuredIcons.map(({ Icon, name }) => (
-                <motion.div
-                  key={name}
-                  whileHover={{ scale: 1.1 }}
-                  className="hover:bg-accent flex items-center justify-center rounded-lg border p-2 transition-colors"
-                >
-                  <Icon size={20} />
-                </motion.div>
+                <Link key={name} href="/icons">
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    className="hover:bg-accent flex cursor-pointer items-center justify-center rounded-lg border p-2 transition-colors"
+                  >
+                    <Icon size={20} />
+                  </motion.div>
+                </Link>
               ))}
             </div>
           </div>
         </div>
 
         <div className="mt-12 border-t pt-8">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-muted-foreground text-center text-sm md:text-left">
-              Built by{" "}
+          <div className="flex flex-col items-center justify-center gap-4">
+            <p className="text-muted-foreground flex items-center gap-1 text-center text-sm">
+              Built with{" "}
+              <HeartIcon className="inline h-4 w-4 text-red-500" />
+              {" "}by{" "}
               <Link
                 href={LINKS.CREATOR}
                 target="_blank"
@@ -179,27 +203,6 @@ const Footer = () => {
               </Link>
               .
             </p>
-
-            <div className="flex items-center gap-4">
-              <Link
-                href={LINKS.GITHUB}
-                target="_blank"
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="GitHub"
-              >
-                <GithubIcon size={20} />
-              </Link>
-              <Link
-                href={LINKS.TWITTER}
-                target="_blank"
-                rel="noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Twitter"
-              >
-                <TwitterXIcon size={20} />
-              </Link>
-            </div>
           </div>
         </div>
       </div>

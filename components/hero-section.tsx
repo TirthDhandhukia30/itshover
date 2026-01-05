@@ -3,7 +3,8 @@ import { useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import PrimaryButton from "@/components/ui/primary-button";
 import SecondaryButton from "@/components/ui/secondary-button";
-import GithubBadge from "./github-badge";
+import GithubBadge from "@/components/github-badge";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 import { motion } from "motion/react";
 import GithubIcon from "@/icons/github-icon";
 import Stack3Icon from "@/icons/stack-3-icon";
@@ -20,23 +21,17 @@ import { AnimatedIconHandle } from "@/icons/types";
 
 const Hero = () => {
   const { theme } = useTheme();
+  const arrowIconRef = useRef<AnimatedIconHandle>(null);
   const textAnimation = {
-    initial: {
-      opacity: 0,
-      y: 10,
-    },
-    animate: {
-      opacity: 1,
-      y: 0,
-    },
-    transition: {
-      duration: 0.3,
-    },
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.3 },
   };
+
   return (
     <section className="flex flex-col items-center justify-center py-20 text-center md:py-32">
       <HeroBackground />
-      <div className="mb-6 flex flex-col items-center gap-3">
+      <div className="mb-6 flex flex-col items-center gap-3 sm:flex-row">
         <GithubBadge />
         <a
           href="https://www.producthunt.com/products/its-hover?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-its-hover"
@@ -45,10 +40,10 @@ const Hero = () => {
           className="inline-block"
         >
           <Image
-            width={200}
-            height={200}
+            width={180}
+            height={180}
             alt="Its Hover - Icons that move and react mirroring user intent | Product Hunt"
-            className="h-auto w-[200px] sm:w-[220px]"
+            className="h-auto w-[160px] sm:w-[180px]"
             src={`https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1056670&theme=${theme === "dark" ? "dark" : "light"}`}
           />
         </a>
@@ -70,8 +65,7 @@ const Hero = () => {
           transition={textAnimation.transition}
           className="text-muted-foreground mx-auto max-w-xl text-lg lowercase sm:text-xl"
         >
-          Editable React components with motion baked in. Works seamlessly with
-          Next.js, shadcn, and modern design systems.
+          Editable React components with motion baked in.
         </motion.p>
       </div>
       <motion.div
@@ -81,15 +75,19 @@ const Hero = () => {
         transition={textAnimation.transition}
         className="mt-8 flex flex-col items-center gap-4 sm:flex-row"
       >
-        <Link href="/icons">
+        <Link
+          href="/icons"
+          onMouseEnter={() => arrowIconRef.current?.startAnimation()}
+          onMouseLeave={() => arrowIconRef.current?.stopAnimation()}
+        >
           <PrimaryButton className="cursor-pointer lowercase">
             Browse Icons
-            <ArrowNarrowRightIcon className="ml-2 h-4 w-4" />
+            <ArrowNarrowRightIcon ref={arrowIconRef} className="ml-2 h-4 w-4" />
           </PrimaryButton>
         </Link>
         <Link href="/sponsor">
           <SecondaryButton className="cursor-pointer lowercase">
-            Sponsor
+            <TextShimmer duration={2}>Sponsor</TextShimmer>
           </SecondaryButton>
         </Link>
       </motion.div>

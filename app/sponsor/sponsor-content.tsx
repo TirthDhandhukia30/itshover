@@ -20,6 +20,7 @@ import CoffeeIcon from "@/icons/coffee-icon";
 import MessageCircleIcon from "@/icons/message-circle-icon";
 import CurrencyBitcoinIcon from "@/icons/currency-bitcoin-icon";
 import CurrencyEthereumIcon from "@/icons/currency-ethereum-icon";
+import SolanaIcon from "@/icons/solana-icon";
 import Image from "next/image";
 import { ISponsor } from "@/models/sponsor";
 import { SponsorCard as SponsorListCard } from "@/components/sponsor-card";
@@ -53,6 +54,49 @@ const DonationCard = ({
       </div>
       <div className="mt-auto pt-4">{children}</div>
     </motion.div>
+  );
+};
+
+const CryptoAddressButton = ({
+  address,
+  icon,
+  label,
+}: {
+  address: string;
+  icon: React.ReactNode;
+  label: string;
+}) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(address);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={handleCopy}
+            className="bg-muted/50 hover:bg-muted flex w-full items-center justify-center gap-3 rounded-lg border p-4 transition-colors"
+          >
+            {copied ? (
+              <CheckedIcon className="h-8 w-8 text-green-500" />
+            ) : (
+              icon
+            )}
+            <span className="text-sm font-medium">
+              {copied ? "Copied!" : `Copy ${label} Address`}
+            </span>
+          </button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="max-w-xs break-all font-mono text-xs">{address}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 };
 
@@ -196,7 +240,11 @@ export default function SponsorContent({
             icon={<CurrencyBitcoinIcon className="h-6 w-6 text-orange-500" />}
             delay={0.3}
           >
-            <CopyField label="BTC Address" value={SPONSOR.btc} />
+            <CryptoAddressButton
+              address={SPONSOR.btc}
+              icon={<CurrencyBitcoinIcon className="h-8 w-8 text-orange-500" />}
+              label="BTC"
+            />
           </DonationCard>
 
           <DonationCard
@@ -205,16 +253,24 @@ export default function SponsorContent({
             icon={<CurrencyEthereumIcon className="h-6 w-6 text-purple-500" />}
             delay={0.4}
           >
-            <CopyField label="ETH Address" value={SPONSOR.eth} />
+            <CryptoAddressButton
+              address={SPONSOR.eth}
+              icon={<CurrencyEthereumIcon className="h-8 w-8 text-purple-500" />}
+              label="ETH"
+            />
           </DonationCard>
 
           <DonationCard
             title="Solana (SOL)"
             description="Support via Solana."
-            icon={<AtSignIcon className="h-6 w-6 text-green-500" />}
+            icon={<SolanaIcon className="h-6 w-6 text-green-500" />}
             delay={0.5}
           >
-            <CopyField label="SOL Address" value={SPONSOR.sol} />
+            <CryptoAddressButton
+              address={SPONSOR.sol}
+              icon={<SolanaIcon className="h-8 w-8 text-green-500" />}
+              label="SOL"
+            />
           </DonationCard>
         </div>
 

@@ -13,6 +13,11 @@ import LayersIcon from "@/icons/layers-icon";
 import AlignCenterIcon from "@/icons/align-center-icon";
 import XIcon from "@/icons/x-icon";
 import { isMac } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -63,20 +68,34 @@ const Navbar = () => {
 
         <div className="hidden flex-1 items-center justify-end gap-2 sm:gap-2 md:flex md:justify-end">
           <GithubStars />
-          <Link
-            target="__blank"
-            className="hover:text-foreground/80 text-foreground/60 mr-3 flex items-center justify-center text-sm font-medium transition-colors"
-            href={LINKS.TWITTER}
-          >
-            <TwitterXIcon className="h-4 w-4" />
-          </Link>
-          <Link
-            target="__blank"
-            className="hover:text-foreground/80 text-foreground/60 flex items-center justify-center text-sm font-medium transition-colors"
-            href={LINKS.GITHUB}
-          >
-            <GithubIcon size={18} />
-          </Link>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                target="__blank"
+                className="hover:text-foreground/80 text-foreground/60 mr-3 flex items-center justify-center text-sm font-medium transition-colors"
+                href={LINKS.TWITTER}
+              >
+                <TwitterXIcon className="h-4 w-4" />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Follow on X</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                target="__blank"
+                className="hover:text-foreground/80 text-foreground/60 flex items-center justify-center text-sm font-medium transition-colors"
+                href={LINKS.GITHUB}
+              >
+                <GithubIcon size={18} />
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Follow on GitHub</p>
+            </TooltipContent>
+          </Tooltip>
 
           <ModeToggle />
 

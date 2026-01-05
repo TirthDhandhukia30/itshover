@@ -3,6 +3,7 @@
 import Link from "next/link";
 import PrimaryButton from "@/components/ui/primary-button";
 import SecondaryButton from "@/components/ui/secondary-button";
+import { TextShimmer } from "@/components/ui/text-shimmer";
 import { motion } from "motion/react";
 import ArrowNarrowRightIcon from "@/icons/arrow-narrow-right-icon";
 import { LINKS } from "@/constants";
@@ -35,7 +36,7 @@ const CTASection = () => {
             className="lowercase"
             onClick={() => window.open(LINKS.GITHUB, "_blank")}
           >
-            Star on GitHub
+            <TextShimmer duration={2}>Star on GitHub</TextShimmer>
           </SecondaryButton>
         </div>
       </div>
