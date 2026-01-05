@@ -29,9 +29,9 @@ const Hero = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center py-20 text-center md:py-32">
+    <section className="flex flex-col items-center justify-center py-12 text-center md:py-24">
       <HeroBackground />
-      <div className="mb-6 flex flex-col items-center gap-3 sm:flex-row">
+      <div className="mb-6 flex flex-col items-center gap-3">
         <GithubBadge />
         <a
           href="https://www.producthunt.com/products/its-hover?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-its-hover"
@@ -56,7 +56,9 @@ const Hero = () => {
           transition={textAnimation.transition}
           className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
         >
-          icons that move with <span className="text-primary">intent</span>
+          icons that move
+          <br />
+          with <span className="text-primary">intent</span>
         </motion.h1>
         <motion.p
           variants={textAnimation}
