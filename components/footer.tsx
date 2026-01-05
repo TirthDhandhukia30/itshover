@@ -92,26 +92,26 @@ const Footer = () => {
       viewport={{ once: true }}
       className="border-t"
     >
-      <div className="w-full px-4 py-12 md:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <div className="w-full px-4 py-8 sm:py-12 md:px-8 lg:px-12">
+        <div className="grid grid-cols-2 gap-8 sm:gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Quick Links</h3>
-            <nav className="flex flex-col space-y-3">
+            <h3 className="text-base font-semibold sm:text-lg">Quick Links</h3>
+            <nav className="flex flex-col space-y-2 sm:space-y-3">
               <Link
                 href="/"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors sm:text-base"
               >
                 Home
               </Link>
               <Link
                 href="/icons"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors sm:text-base"
               >
                 Icons
               </Link>
               <Link
                 href="/sponsor"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors sm:text-base"
               >
                 Sponsor
               </Link>
@@ -119,7 +119,7 @@ const Footer = () => {
                 href={LINKS.GITHUB}
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground text-sm transition-colors sm:text-base"
               >
                 GitHub
               </Link>
@@ -127,13 +127,13 @@ const Footer = () => {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Sponsor</h3>
-            <div className="flex flex-col space-y-3">
+            <h3 className="text-base font-semibold sm:text-lg">Sponsor</h3>
+            <div className="flex flex-col space-y-2 sm:space-y-3">
               <Link
                 href={SPONSOR.buymeacoffee}
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 transition-colors"
+                className="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm transition-colors sm:text-base"
               >
                 <CoffeeIcon size={16} />
                 Buy Me a Coffee
@@ -161,9 +161,9 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="space-y-4 lg:col-span-2">
-            <h3 className="text-lg font-semibold">Featured Icons</h3>
-            <div className="grid grid-cols-5 gap-3 sm:grid-cols-6 md:grid-cols-5 lg:grid-cols-10">
+          <div className="col-span-2 space-y-4">
+            <h3 className="text-base font-semibold sm:text-lg">Featured Icons</h3>
+            <div className="grid grid-cols-5 gap-2 sm:grid-cols-6 sm:gap-3 md:grid-cols-5 lg:grid-cols-10">
               {featuredIcons.map(({ Icon, name }) => (
                 <Link key={name} href="/icons">
                   <motion.div
@@ -178,9 +178,9 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t pt-8">
+        <div className="mt-8 border-t pt-6 sm:mt-12 sm:pt-8">
           <div className="flex flex-col items-center justify-center gap-4">
-            <p className="text-muted-foreground flex items-center gap-1 text-center text-sm">
+            <p className="text-muted-foreground flex flex-wrap items-center justify-center gap-1 text-center text-xs sm:text-sm">
               Built with{" "}
               <HeartIcon className="inline h-4 w-4 text-red-500" />
               {" "}by{" "}
@@ -192,7 +192,10 @@ const Footer = () => {
               >
                 Abhijit
               </Link>
-              . The source code is available on{" "}
+              <span className="hidden sm:inline">
+                . The source code is available on{" "}
+              </span>
+              <span className="sm:hidden"> · </span>
               <Link
                 href={LINKS.GITHUB}
                 target="_blank"
@@ -201,7 +204,7 @@ const Footer = () => {
               >
                 GitHub
               </Link>
-              .
+              <span className="hidden sm:inline">.</span>
             </p>
           </div>
         </div>
